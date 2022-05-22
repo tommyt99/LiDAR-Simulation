@@ -1,2 +1,5 @@
 # PROJECT MJOLNIR
-Self-mowing lawn mower
+
+The Lidar simulation has nothing to do with MJOLNIR.
+
+More to come in the near future.
