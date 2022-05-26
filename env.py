@@ -10,7 +10,7 @@ class buildEnvironment:
         self.MapWindowName = 'RRT path planning'
         pygame.display.set_caption(self.MapWindowName)
         self.map= pygame.display.set_mode((self.mapw, self.maph)) #initializes the blank canvas
-        self.map.blit(self.externalMap, (0,0)) #draws floor plan ontop of blank canvas
+        self.map.blit(self.externalMap, (0,0)) #overlays floor plan ontop of blank canvas
         
         #Colors
         self.black = (0,0,0)
@@ -29,7 +29,7 @@ class buildEnvironment:
 
     def dataStorage(self,data):
         print(len(self.pointCloud))
-        if data != False:
+        if data != False: #if data exists, then start for loop
             for element in data:
                 point = self.AD2pos(element[0],element[1],element[2])
                 if point not in self.pointCloud:
