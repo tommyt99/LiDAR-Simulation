@@ -8,9 +8,9 @@ def uncertainty_add(distance,angle,sigma):
     covariance = np.diag(sigma ** 2) #noise of distance and angle measurements are not correlated, hence only diagonal is non-zero
     #https://www.cuemath.com/algebra/covariance-matrix/
 
-    distance, angle = np.random.multivariate_normal(mean,covariance) #gets the noisy values
+    distance, angle = np.random.multivariate_normal(mean,covariance) #gets the actual noisy values from Gaussian distribution 
 
-    #this is to make sure we don't get negative values 
+    #max() function so we don't get negative values 
     distance = max(distance,0)
     angle = max(angle,0)
 
@@ -41,9 +41,9 @@ class LaserSensor:
         x1, y1 = self.position[0], self.position[1] 
         #discretize polar coordinates
         for angle in np.linspace(0, 2*math.pi,60,False): #scan from 0 to 2pi, 60 degree intervals
-            #(interval dictates resolution of scanned map)
+            #(spacing dictates resolution of scanned map)
 
-            x2,y2 = (x1 + self.Range*math.cos(angle) , y2 + self.Range*math.sin(angle)) #getting distance measurements
+            x2,y2 = (x1 + self.Range*math.cos(angle) , y1 + self.Range*math.sin(angle)) #getting distance measurements
 
             for i in range (0,100):
                 u = i/100
@@ -59,10 +59,10 @@ class LaserSensor:
                         #store measurement
                         data.append(output)
                         break
-        
+         
 
         #when sensor completes a full turn, return the data to be drawn in the map ...which is the responsiblity of the buildEnvironment class in the env.py file
-        if len(data>0):
+        if len(data)>0:
             return data
         else:
             return False
