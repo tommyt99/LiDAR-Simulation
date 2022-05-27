@@ -22,22 +22,23 @@ class buildEnvironment:
 
 
     #helper method that converts raw distance and angle data from sensor.py to cartesian coordinates
+    #AD2pos means Angle, Distance to Position?
+    #Uses Distance and Angle from data[] in sensors.sensesObstacles() to obtain cartesian coordinates of walls for point cloud
     def AD2pos(self, distance, angle, robotPosition):
         x = robotPosition[0] + distance * math.cos(angle)
-        y = robotPosition[1] - distance * math.sin(angle) # - for display inverted y axis 
+        y = robotPosition[1] + distance * math.sin(angle) 
         return ( int(x), int(y) )
 
     def dataStorage(self,data):
         print(len(self.pointCloud))
         if data != False: #if data exists, then start for loop
             for element in data:
-                point = self.AD2pos(element[0],element[1],element[2]) #AD2pos means Add Data to Position?
+                point = self.AD2pos(element[0],element[1],element[2]) 
                 if point not in self.pointCloud: #Note: Point cloud should ONLY be the WALLS.
                     self.pointCloud.append(point)
 
 
     def show_sensorData(self):
-        #draw data onto a "new" map
         self.infomap=self.map.copy()
         for point in self.pointCloud:
             self.infomap.set_at( (int(point[0]), int(point[1])), (255,0,0) ) #show sensor_data in RED pointcloud
