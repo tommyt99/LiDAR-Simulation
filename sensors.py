@@ -33,14 +33,20 @@ class LaserSensor:
     def sense_obstacles(self):
         data=[] #stores distance and angle of ONLY WALLS from bot's position  
         x1, y1 = self.position[0], self.position[1]  
-        for angle in np.linspace(0, 2*math.pi, 60,False): #scan from 0 to 2pi, 60 degree intervals (Resolution). For every angle, check if there is a wall
+        for angle in np.linspace(0, 2*math.pi, 60,False): #scan from 0 to 2pi, 6 degree intervals (Resolution). For every angle, check if there is a wall
             x2,y2 = (x1 + self.Range*math.cos(angle), y1 + self.Range*math.sin(angle)) #coordinate of end of line segment
             for i in range (0,100): #If wall is within laser's path ...
                 u = i/100 #Essentially a percentage
+                x = int(x1 + (x2-x1)*u)
+                y = int(y1 + (y2-y1)*u)
+
+                """
                 x = int(x2*u + x1*(1-u))
                 y = int(y2*u + y1*(1-u))
+                """
+
                 if 0<x<self.W and 0<y<self.H: #if within the window/map. Reference point is pixel (0,0).
-                    color = self.map.get_at((x,y)) #extract RGB value on map at that exact point. 
+                    color = self.map.get_at((x,y)) #extract RGB value on map at every point of iteration and do the quick check below ... 
                     if (color[0],color[1],color[2]) == (0,0,0): #if color is black, aka the walls, calculate this distance from the robot
                         distance = self.distance((x,y)) 
                         output = uncertainty_add(distance,angle, self.sigma) #add uncertainty to measurements
