@@ -21,7 +21,7 @@ class buildEnvironment:
         self.white = (255,255,255)
 
 
-    #helper method that converts raw distance and angle data from sensor.py to cartesian coordinates
+    #Key Concept: Helper Method that converts raw distance and angle data from sensor.py to cartesian coordinates
     #AD2pos means Angle, Distance to Position?
     #Uses Distance and Angle from data[] in sensors.sensesObstacles() to obtain cartesian coordinates of walls for point cloud
     def AD2pos(self, distance, angle, robotPosition):
@@ -29,7 +29,7 @@ class buildEnvironment:
         y = robotPosition[1] + distance * math.sin(angle) 
         return ( int(x), int(y) ) #returns cartesian coordinates of walls. 
 
-    def dataStorage(self,data): # data = [Distance, Angle, (x,y)] --> This is the return
+    def dataStorage(self,data): # data = [Distance, Angle, (x,y)] --> This is the input
         print(len(self.pointCloud))
         if data != False: #if data exists, then start for loop
             for element in data:
