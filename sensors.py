@@ -16,7 +16,7 @@ class LaserSensor:
 
     def __init__(self,Range,map,uncertainty): #uncertainty is an array with 2 values [sigma1,sigma2]
         self.Range = Range
-        self.speed = 0.5 #rotations per second 
+        self.speed = 0.5 #rotations per second #IS NOT USED THROUGHOUT THIS SCRIPT
         self.sigma = np.array([uncertainty[0], uncertainty[1]])
         self.position = (0,0)
         self.map = map

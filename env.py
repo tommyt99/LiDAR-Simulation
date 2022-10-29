@@ -4,7 +4,7 @@ import pygame
 class buildEnvironment:
 
     def __init__(self, MapDimensions):
-        self.pointCloud=[]
+        self.pointCloud=[] #array containing coordinates of sensed objects (walls). Purely just (x,y) information.
         self.externalMap=pygame.image.load('floorplan.png')
         self.maph, self.mapw = MapDimensions
         self.MapWindowName = 'RRT path planning'
@@ -33,14 +33,14 @@ class buildEnvironment:
         print(len(self.pointCloud))
         if data != False: #if data exists, then start for loop
             for element in data:
-                point = self.AD2pos(element[0],element[1],element[2]) 
-                if point not in self.pointCloud: #Note: Point cloud should ONLY be the WALLS.
+                point = self.AD2pos(element[0],element[1],element[2]) #data = [Distance, Angle, (x,y)]
+                if point not in self.pointCloud: #Note: Point cloud should ONLY be the WALLS (x,y). If the wall has not already been sensed, then add to pointcloud.
                     self.pointCloud.append(point)
 
 
     def show_sensorData(self):
-        self.infomap=self.map.copy()
+        self.infomap=self.map.copy() #infomap DISPLAYS the coordinates of walls thru changing the colors of pixels in the pop-up window box. 
         for point in self.pointCloud:
-            self.infomap.set_at( (int(point[0]), int(point[1])), (255,0,0) ) #show sensor_data in RED pointcloud
+            self.infomap.set_at( (int(point[0]), int(point[1])), (255,0,0) ) #show each wall coordinate as RED color in pointcloud
 
 
