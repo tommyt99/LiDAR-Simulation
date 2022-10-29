@@ -25,7 +25,7 @@ while running:
         laser.position = position
         sensor_data = laser.sense_obstacles() #Step 3: Sense. Stores sensed data array into sensor_data 
         environment.dataStorage(sensor_data) #Step 4: point cloud data storage
-        environment.show_sensorData() #Step 5: point cloud visualization
+        environment.show_sensorData() #Step 5: visualization
     environment.map.blit(environment.infomap, (0,0)) #update point cloud on top of main map
     pygame.display.update() 
 

@@ -46,7 +46,7 @@ class LaserSensor:
                 """
 
                 if 0<x<self.W and 0<y<self.H: #if within the window/map. Reference point is pixel (0,0).
-                    color = self.map.get_at((x,y)) #extract RGB value on map at every point of iteration and do the quick check below ... 
+                    color = self.map.get_at((x,y)) #extract RGB value on map at every point of iteration within laser's path and do the quick check below ... 
                     if (color[0],color[1],color[2]) == (0,0,0): #if color is black, aka the walls, calculate this distance from the robot
                         distance = self.distance((x,y)) 
                         output = uncertainty_add(distance,angle, self.sigma) #add uncertainty to measurements

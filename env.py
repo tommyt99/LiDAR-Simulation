@@ -29,18 +29,22 @@ class buildEnvironment:
         y = robotPosition[1] + distance * math.sin(angle) 
         return ( int(x), int(y) ) #returns cartesian coordinates of walls. 
 
-    def dataStorage(self,data): # data = [Distance, Angle, (x,y)] --> This is the input
+    def dataStorage(self,data): # data = [Distance, Angle, (x,y)] --> This is the input. Storing data in point cloud. 
         print(len(self.pointCloud))
         if data != False: #if data exists, then start for loop
             for element in data:
-                point = self.AD2pos(element[0],element[1],element[2]) #data = [Distance, Angle, (x,y)]
+                point = self.AD2pos(element[0],element[1],element[2]) #Input: data = [Distance, Angle, (x,y)]. Output: (x,y) coordinate of objects/walls.
                 if point not in self.pointCloud: #Note: Point cloud should ONLY be the WALLS (x,y). If the wall has not already been sensed, then add to pointcloud.
-                    self.pointCloud.append(point)
+                    self.pointCloud.append(point) #[(x1,y1), (x2,y2), (x3,y3)]
+
+
+
+
 
 
     def show_sensorData(self):
-        self.infomap=self.map.copy() #infomap DISPLAYS the coordinates of walls thru changing the colors of pixels in the pop-up window box. 
+        self.infomap=self.map.copy() #information map DISPLAYS the coordinates of walls thru changing the colors of pixels in the pop-up window box. 
         for point in self.pointCloud:
-            self.infomap.set_at( (int(point[0]), int(point[1])), (255,0,0) ) #show each wall coordinate as RED color in pointcloud
+            self.infomap.set_at( (int(point[0]), int(point[1])), (255,0,0) ) #show each object coordinate in the recorded point cloud as red dot in the pop-up box.
 
 
