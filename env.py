@@ -7,7 +7,7 @@ class buildEnvironment:
         self.pointCloud=[] #array containing coordinates of sensed objects (walls). Purely just (x,y) information.
         self.externalMap=pygame.image.load('floorplan.png')
         self.maph, self.mapw = MapDimensions
-        self.MapWindowName = 'RRT path planning'
+        self.MapWindowName = 'LiDAR Simulation'
         pygame.display.set_caption(self.MapWindowName)
         self.map= pygame.display.set_mode((self.mapw, self.maph)) #initializes the blank canvas
         self.map.blit(self.externalMap, (0,0)) #overlays floor plan ontop of blank canvas
@@ -23,6 +23,7 @@ class buildEnvironment:
 
     #Key Concept: Helper Method that converts raw distance and angle data from sensor.py to cartesian coordinates
     #AD2pos means Angle, Distance to Position?
+    
     #Uses Distance and Angle from data[] in sensors.sensesObstacles() to obtain cartesian coordinates of walls for point cloud
     def AD2pos(self, distance, angle, robotPosition):
         x = robotPosition[0] + distance * math.cos(angle)

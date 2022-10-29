@@ -1,6 +1,11 @@
 import env, sensors
 import pygame
 
+"""
+This works best on a Windows PC. Getting pygame on a Mac reuqires lots of steps, found here:
+https://stackoverflow.com/questions/62272631/cant-install-pygame-on-mac-using-pip3-install-pygame
+"""
+
 #Step 1: Initialize environment and laser.
 
 environment = env.buildEnvironment((600,1200)) #build the environment
@@ -25,7 +30,7 @@ while running:
         laser.position = position
         sensor_data = laser.sense_obstacles() #Step 3: Sense. Stores sensed data array into sensor_data 
         environment.dataStorage(sensor_data) #Step 4: point cloud data storage
-        environment.show_sensorData() #Step 5: visualization
+        environment.show_sensorData() #Step 5: visualization. Updates the infomap. 
     environment.map.blit(environment.infomap, (0,0)) #update point cloud on top of main map
     pygame.display.update() 
 
