@@ -27,7 +27,7 @@ class buildEnvironment:
     def AD2pos(self, distance, angle, robotPosition):
         x = robotPosition[0] + distance * math.cos(angle)
         y = robotPosition[1] + distance * math.sin(angle) 
-        return ( int(x), int(y) )
+        return ( int(x), int(y) ) #returns cartesian coordinates of walls. 
 
     def dataStorage(self,data):
         print(len(self.pointCloud))

@@ -16,7 +16,7 @@ class LaserSensor:
 
     def __init__(self,Range,map,uncertainty): #uncertainty is an array with 2 values [sigma1,sigma2]
         self.Range = Range
-        self.speed = 4 #rotations per second 
+        self.speed = 0.5 #rotations per second 
         self.sigma = np.array([uncertainty[0], uncertainty[1]])
         self.position = (0,0)
         self.map = map
@@ -51,7 +51,7 @@ class LaserSensor:
                         distance = self.distance((x,y)) 
                         output = uncertainty_add(distance,angle, self.sigma) #add uncertainty to measurements
                         output.append(self.position) #add robot's position to list
-                        data.append(output) 
+                        data.append(output) #[Distance, Angle, (x,y)] --> This is the return
                         break
          
         #when sensor completes a full turn, return the data to be drawn in the map ...which is the responsiblity of the buildEnvironment class in the env.py file
