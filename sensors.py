@@ -56,7 +56,7 @@ class LaserSensor:
          
         #when sensor completes a full turn, return the data to be drawn in the map ...which is the responsiblity of the buildEnvironment class in the env.py file
         if len(data)>0:
-            return data
+            return data #[Distance, Angle, (x,y)] --> This is the return
         else:
             return False
 

@@ -29,7 +29,7 @@ class buildEnvironment:
         y = robotPosition[1] + distance * math.sin(angle) 
         return ( int(x), int(y) ) #returns cartesian coordinates of walls. 
 
-    def dataStorage(self,data):
+    def dataStorage(self,data): # data = [Distance, Angle, (x,y)] --> This is the return
         print(len(self.pointCloud))
         if data != False: #if data exists, then start for loop
             for element in data:
