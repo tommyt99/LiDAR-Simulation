@@ -12,7 +12,7 @@ environment = env.buildEnvironment((600,1200)) #build the environment
 environment.originalMap = environment.map.copy() #save a copy of the main map with the floor plan as "original map"
 laser=sensors.LaserSensor(200, environment.originalMap, uncertainty=(0.5,0.01))
 environment.map.fill( (0,0,0) ) #fill map with black, which will be the infomap where we draw point cloud in
-environment.infomap = environment.map.copy() 
+environment.infomap = environment.map.copy() #infomap contains the location data of objects/walls.
 
 #Step 2: Setup pygame simulation
 running = True
@@ -31,7 +31,7 @@ while running:
         sensor_data = laser.sense_obstacles() #Step 3: Sense. Stores sensed data array into sensor_data 
         environment.dataStorage(sensor_data) #Step 4: point cloud data storage
         environment.show_sensorData() #Step 5: visualization. Updates the infomap. 
-    environment.map.blit(environment.infomap, (0,0)) #update point cloud on top of main map
+    environment.map.blit(environment.infomap, (0,0)) #overlay infomap (point cloud) on top of environment.map (which is the pygame.display)
     pygame.display.update() 
 
 pygame.quit() #sometimes window will not close after clicking red X 

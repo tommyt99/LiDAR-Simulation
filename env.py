@@ -23,7 +23,7 @@ class buildEnvironment:
 
     #Key Concept: Helper Method that converts raw distance and angle data from sensor.py to cartesian coordinates
     #AD2pos means Angle, Distance to Position?
-    
+
     #Uses Distance and Angle from data[] in sensors.sensesObstacles() to obtain cartesian coordinates of walls for point cloud
     def AD2pos(self, distance, angle, robotPosition):
         x = robotPosition[0] + distance * math.cos(angle)
