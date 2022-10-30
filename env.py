@@ -9,7 +9,7 @@ class buildEnvironment:
         self.maph, self.mapw = MapDimensions
         self.MapWindowName = 'LiDAR Simulation'
         pygame.display.set_caption(self.MapWindowName)
-        self.map= pygame.display.set_mode((self.mapw, self.maph)) #initializes the blank canvas
+        self.map= pygame.display.set_mode((self.mapw, self.maph)) #opens the pop-up window box
         self.map.blit(self.externalMap, (0,0)) #overlays floor plan ontop of blank canvas
         
         #Colors
