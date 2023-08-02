@@ -18,7 +18,7 @@ class LaserSensor:
         self.Range = Range
         self.speed = 0.5 #rotations per second #IS NOT USED THROUGHOUT THIS SCRIPT
         self.sigma = np.array([uncertainty[0], uncertainty[1]])
-        self.position = (0,0)
+        self.position = (0,0) #<<< self.position should update to cursor's position!!!! BUG NEEDS TO BE FIXED
         self.map = map
         self.W, self.H = pygame.display.get_surface().get_size()
         self.sensedObstacles = []
@@ -48,10 +48,10 @@ class LaserSensor:
                 if 0<x<self.W and 0<y<self.H: #if within the window/map. Reference point is pixel (0,0).
                     color = self.map.get_at((x,y)) #extract RGB value on map at every point of iteration within laser's path and do the quick check below ... 
                     if (color[0],color[1],color[2]) == (0,0,0): #if color is black, aka the walls, calculate this distance from the robot
-                        distance = self.distance((x,y)) 
+                        distance = self.distance((x,y)) #References method above 
                         output = uncertainty_add(distance,angle, self.sigma) #add uncertainty to measurements
-                        output.append(self.position) #add robot's position to list
-                        data.append(output) #[Distance, Angle, (x,y)] --> This is the return
+                        output.append(self.position) #add robot's position to list. Robot is always at (0,0) position though... ??? BUG
+                        data.append(output) #[Distance, Angle, (x,y)] --> This is the return 
                         break
          
         #when sensor completes a full turn, return the data to be drawn in the map ...which is the responsiblity of the buildEnvironment class in the env.py file
