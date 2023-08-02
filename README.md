@@ -1,4 +1,4 @@
 # PROJECT MJOLNIR
 
-Run main.py, may need to type "pip install pygame" and "pip install numpy" into command line.
+Run the file "main.py". You are going to need "pygame" and "numpy" for this LiDAR simulation. 
 
