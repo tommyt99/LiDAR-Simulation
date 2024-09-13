@@ -2,7 +2,7 @@ import env, sensors
 import pygame
 
 """
-This works best on a Windows PC. Getting pygame on a Mac reuqires lots of steps, found here:
+This works best on a Windows PC. Getting pygame on a Mac requires lots of steps, found here:
 https://stackoverflow.com/questions/62272631/cant-install-pygame-on-mac-using-pip3-install-pygame
 """
 
@@ -22,9 +22,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if pygame.mouse.get_focused():    
-            sensorON=True  #sensor is only ON IF mouse cursor is INSIDE the window
-        elif not pygame.mouse.get_focused():
-            sensorON= False
+            sensorON = True  # Sensor is ON if the mouse cursor is inside the window and the window is active
+        else:
+            sensorON = False  # Sensor is OFF if the mouse cursor is outside the window or the window is inactive
     if sensorON: 
         position= pygame.mouse.get_pos()
         laser.position = position
